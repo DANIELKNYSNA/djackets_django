@@ -1,6 +1,4 @@
-from email.mime import image
 from io import BytesIO
-from unicodedata import category
 from PIL import Image
 
 from django.core.files import File
@@ -8,7 +6,7 @@ from django.db import models
 
 # Create your models here.
 
-class Catagory(models.Model):
+class Category(models.Model):
   name = models.CharField(max_length=255)
   slug = models.SlugField()
 
@@ -22,7 +20,7 @@ class Catagory(models.Model):
     return f'/{self.slug}/'
 
 class Product(models.Model):
-  category = models.ForeignKey(Catagory, related_name='products', on_delete=models.CASCADE)
+  category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
   name = models.CharField(max_length=255)
   slug = models.SlugField()
   description = models.TextField(blank=True, null=True)
